@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "motion/react";
-import { WaitlistForm } from "@/components/launch/waitlist-form";
 import { LAUNCH } from "@/components/launch/launch-config";
 import { cn } from "@/lib/utils";
 
 /**
- * The paper receipt visual. Used whole in the Receipt template, and without its
- * waitlist as the hero visual in the Launch template.
+ * The paper receipt visual used as the launch page's hero.
  *
- * Always paper-on-ink regardless of theme — a receipt is a receipt.
+ * It used to carry a waitlist form; that came out when the beta went live and
+ * "reserve your copy" stopped being true. Always paper-on-ink regardless of
+ * theme — a receipt is a receipt.
  */
 
 export const PAPER = "#FDFBF6";
@@ -64,11 +64,9 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 export function ReceiptCard({
-  showWaitlist = true,
   tilt = -1.5,
   className,
 }: {
-  showWaitlist?: boolean;
   tilt?: number;
   className?: string;
 }) {
@@ -103,7 +101,7 @@ export function ReceiptCard({
           </div>
           <div className="flex justify-between">
             <span>Status</span>
-            <span>Preparing</span>
+            <span>Live in beta</span>
           </div>
           <div className="flex justify-between">
             <span>Served by</span>
@@ -139,18 +137,6 @@ export function ReceiptCard({
 
         <div className="my-4 border-t border-dashed border-current opacity-30" />
 
-        {showWaitlist ? (
-          <>
-            <p className="mb-2 text-center text-[11px] tracking-[0.18em] uppercase opacity-70">
-              Reserve your copy
-            </p>
-            <WaitlistForm layout="stacked" cta="Add me to the queue" />
-            <p className="mt-2 text-center text-[10px] uppercase opacity-50">
-              {LAUNCH.footnote}
-            </p>
-          </>
-        ) : null}
-
         <div className="mt-6 flex h-12 items-end justify-center gap-[2px]">
           {BARCODE.map((width, index) => (
             <span
@@ -161,7 +147,7 @@ export function ReceiptCard({
           ))}
         </div>
         <p className="mt-2 text-center text-[10px] tracking-[0.3em] uppercase opacity-60">
-          Launching Nov 2026
+          In beta &middot; open now
         </p>
       </div>
       <TornEdge flip />

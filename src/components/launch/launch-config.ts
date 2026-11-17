@@ -1,4 +1,10 @@
-/** One place to edit the copy shown on the /comingsoon launch page. */
+/**
+ * One place to edit the copy shown on the /comingsoon launch page.
+ *
+ * The page stopped being a waitlist teaser when the beta went live — the CTA
+ * sends people to /signup, so copy here should invite them in, not ask them to
+ * wait.
+ */
 
 export const LAUNCH = {
   product: "Splizo",
@@ -7,8 +13,10 @@ export const LAUNCH = {
   headlineAccent: "finally settled.",
   subhead:
     "One shared ledger for the whole household. Import statements, split what's shared, watch the loans shrink — without a spreadsheet in sight.",
-  eyebrow: "Private beta · India",
-  footnote: "No card. No spam. One email when we open the doors.",
+  eyebrow: "Beta is live · India",
+  footnote: "Free while we're in beta. No card needed.",
+  ctaPrimary: "Create your household",
+  ctaSecondary: "Log in",
 } as const;
 
 /**

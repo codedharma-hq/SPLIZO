@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 import { Check, ChevronDown, ScanLine, Sparkles } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { WaitlistForm } from "@/components/launch/waitlist-form";
+import { LaunchCta } from "@/components/launch/launch-cta";
 import { PaperBackdrop } from "@/components/launch/paper-backdrop";
 import { ReceiptCard } from "@/components/launch/receipt-card";
 import { DashboardPreview } from "@/components/launch/dashboard-preview";
@@ -14,6 +14,7 @@ import {
   LendingGraphic,
 } from "@/components/launch/feature-graphics";
 import { LAUNCH, KEY_FEATURES } from "@/components/launch/launch-config";
+import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/site-config";
 
 const rise = {
   hidden: { opacity: 0, y: 18 },
@@ -97,9 +98,21 @@ export default function ComingSoonPage() {
       <header className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <Logo size={32} className="scale-125 origin-left" />
         <div className="flex items-center gap-3">
-          <span className="hidden text-xs font-semibold text-muted-foreground sm:inline">
+          <span className="hidden text-xs font-semibold text-muted-foreground lg:inline">
             {LAUNCH.tagline}
           </span>
+          <a
+            href={APP_LOGIN_URL}
+            className="hidden text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground sm:inline"
+          >
+            Log in
+          </a>
+          <a
+            href={APP_SIGNUP_URL}
+            className="inline-flex h-9 items-center rounded-lg bg-primary px-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+          >
+            Get started
+          </a>
           <ThemeToggle />
         </div>
       </header>
@@ -114,13 +127,13 @@ export default function ComingSoonPage() {
         >
           <motion.span
             variants={rise}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold tracking-[0.14em] text-primary uppercase"
+            className="inline-flex items-center gap-2 rounded-full border border-income/30 bg-income/10 px-3.5 py-1.5 text-xs font-semibold tracking-[0.14em] text-income uppercase"
           >
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-income opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-income" />
             </span>
-            Coming Soon
+            {LAUNCH.eyebrow}
           </motion.span>
 
           <motion.h1
@@ -142,7 +155,7 @@ export default function ComingSoonPage() {
           </motion.p>
 
           <motion.div variants={rise} className="w-full max-w-md">
-            <WaitlistForm cta="Notify me at launch" />
+            <LaunchCta />
             <p className="mt-2.5 text-xs text-muted-foreground">{LAUNCH.footnote}</p>
           </motion.div>
 
@@ -157,6 +170,10 @@ export default function ComingSoonPage() {
             <span className="flex items-center gap-1.5">
               <ScanLine className="h-3.5 w-3.5 text-primary" />
               Bank &amp; UPI statements, read for you
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check className="h-3.5 w-3.5 text-income" />
+              Free through the beta
             </span>
           </motion.div>
         </motion.div>
@@ -173,7 +190,7 @@ export default function ComingSoonPage() {
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ReceiptCard showWaitlist={false} tilt={-1.5} />
+              <ReceiptCard tilt={-1.5} />
             </motion.div>
 
             <HeroChip
@@ -204,7 +221,7 @@ export default function ComingSoonPage() {
         transition={{ delay: 1.6 }}
         className="relative z-10 mx-auto flex flex-col items-center gap-1 pb-16 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
       >
-        <span>What we&apos;re building</span>
+        <span>See what&apos;s inside</span>
         <motion.span
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
@@ -293,13 +310,14 @@ export default function ComingSoonPage() {
           className="rounded-3xl border border-border bg-card/80 p-8 shadow-xl shadow-black/5 backdrop-blur"
         >
           <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
-            Be there on day one.
+            Start with this month.
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-            {LAUNCH.subhead}
+            Create your household, import one statement, and see where the money
+            actually went. It takes a few minutes.
           </p>
           <div className="mx-auto mt-5 max-w-md">
-            <WaitlistForm cta="Notify me at launch" />
+            <LaunchCta align="center" />
             <p className="mt-2.5 text-xs text-muted-foreground">{LAUNCH.footnote}</p>
           </div>
         </motion.div>

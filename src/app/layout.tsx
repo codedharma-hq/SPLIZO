@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SITE_URL } from "@/lib/site-config";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import "./globals.css";
@@ -14,7 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://splizo.codedharma.com";
 const TAGLINE = "Every rupee, tracked and understood.";
 const DESCRIPTION =
   "Splizo is a household finance tracker built for Indian families — one shared ledger for every account, both homes, and every member, with bank & UPI statement import and a running family lending ledger.";

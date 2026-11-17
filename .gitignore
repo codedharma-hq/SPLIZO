@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ...except the template, which carries no secrets
+!.env.example
 
 # vercel
 .vercel
@@ -52,3 +54,15 @@ brand/.reel-frames/
 brand/cartoon/**/*.mp4
 brand/cartoon/**/*.png
 *.zip
+
+# Marketing/campaign generators and planning kept out of the app repo.
+# NOTE: the older brand/build-*.mjs scripts were committed before this rule, and
+# .gitignore does not untrack what is already tracked — use `git rm --cached` if
+# you want those out too.
+brand/build-covers.mjs
+brand/build-dhanteras.mjs
+brand/build-launch.mjs
+brand/marketing-plan.md
+
+# ffmpeg render logs from the reel builds
+*.log
