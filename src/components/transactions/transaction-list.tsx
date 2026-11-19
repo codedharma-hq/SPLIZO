@@ -37,24 +37,36 @@ export function TransactionList({ transactions }: { transactions: Row[] }) {
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="truncate text-sm font-medium text-foreground">
+                <span className="truncate text-sm font-medium text-foreground" title={t.description}>
                   {t.description}
                 </span>
+                {/* On a phone the badge sits on the meta line instead: inline,
+                    it left the description barely 100px to work with. */}
                 {t.category && (
                   <span
-                    className="shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold"
+                    className="hidden shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold sm:inline"
                     style={getCategoryBadgeStyle(t.category.name)}
                   >
                     {t.category.name}
                   </span>
                 )}
               </div>
-              <div className="text-xs text-muted-foreground">
-                {new Date(t.date).toLocaleDateString("en-IN", {
-                  timeZone: "UTC",
-                  day: "numeric",
-                  month: "short",
-                })}
+              <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="shrink-0">
+                  {new Date(t.date).toLocaleDateString("en-IN", {
+                    timeZone: "UTC",
+                    day: "numeric",
+                    month: "short",
+                  })}
+                </span>
+                {t.category && (
+                  <span
+                    className="truncate rounded-full px-2 py-0.5 text-[11px] font-semibold sm:hidden"
+                    style={getCategoryBadgeStyle(t.category.name)}
+                  >
+                    {t.category.name}
+                  </span>
+                )}
               </div>
             </div>
             <span

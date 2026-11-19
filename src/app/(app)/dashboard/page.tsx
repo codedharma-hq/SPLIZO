@@ -126,7 +126,7 @@ export default async function DashboardPage({
   ];
 
   return (
-    <div className="flex w-full flex-col gap-6 p-6">
+    <div className="flex w-full flex-col gap-6 p-4 md:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">Dashboard</h1>
@@ -141,7 +141,9 @@ export default async function DashboardPage({
           <DateRangeFilter basePath="/dashboard" range={activeRange} from={from} to={to} />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Four across only from xl: at lg these cards are ~168px wide, which
+            truncates lakh-sized amounts and the "% from last month" line. */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <HeadlineCards cards={cards} />
           <div className="rounded-xl border border-border bg-card p-4">
             <div className="mb-3 flex items-center gap-2">
@@ -150,18 +152,20 @@ export default async function DashboardPage({
               </span>
               <h2 className="text-base font-bold text-foreground">Loans</h2>
             </div>
-            <div className="flex items-center justify-between gap-2">
-              <div>
-                <div className="text-xs text-muted-foreground">Lent</div>
-                <div className="text-lg font-extrabold text-income">
-                  ₹{loanSummary.totalLent.toLocaleString("en-IN")}
-                </div>
+            {/* Label and amount share a row, the two amounts stack — side by
+                side, two lakh-sized figures overflow a quarter-width card. */}
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="shrink-0 text-xs text-muted-foreground">Lent</span>
+                <span className="truncate text-base font-extrabold text-income tabular-nums">
+                  ₹{loanSummary.totalLent.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                </span>
               </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Borrowed</div>
-                <div className="text-lg font-extrabold text-expense">
-                  ₹{loanSummary.totalBorrowed.toLocaleString("en-IN")}
-                </div>
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="shrink-0 text-xs text-muted-foreground">Borrowed</span>
+                <span className="truncate text-base font-extrabold text-expense tabular-nums">
+                  ₹{loanSummary.totalBorrowed.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                </span>
               </div>
             </div>
           </div>
@@ -187,7 +191,7 @@ export default async function DashboardPage({
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-lg font-bold text-foreground">Your charts</h2>
         <AddChartButton defaultRange={{ rangeKey: activeRange, from, to }} />
       </div>

@@ -28,8 +28,12 @@ export function CustomChartCard({
 
   return (
     <div className="rounded-xl border border-border bg-card p-4">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h2 className="text-base font-bold text-foreground">{chart.title}</h2>
+      <div className="mb-3 flex items-start justify-between gap-2">
+        {/* min-w-0 so a long user-typed title wraps instead of shoving the
+            range picker and menu out of the card. */}
+        <h2 className="min-w-0 flex-1 text-base font-bold break-words text-foreground">
+          {chart.title}
+        </h2>
         <div className="flex shrink-0 items-center gap-2">
           <ChartRangeSelect
             chartId={chart.id}
@@ -65,7 +69,12 @@ export function CustomChartCard({
         <>
           {chart.chartType === "donut" && <CategoryDonut data={data as { name: string; value: number }[]} />}
           {chart.chartType === "bar" && <BarBreakdown data={data as { name: string; value: number }[]} />}
-          {chart.chartType === "line" && <SingleSeriesLine data={data as { name: string; value: number }[]} />}
+          {chart.chartType === "line" && (
+            <SingleSeriesLine
+              data={data as { name: string; value: number }[]}
+              label={chart.metric === "income" ? "Income" : "Expense"}
+            />
+          )}
         </>
       )}
 

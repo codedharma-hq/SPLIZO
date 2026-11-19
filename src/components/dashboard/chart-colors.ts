@@ -30,3 +30,13 @@ export const CHART_TOOLTIP_STYLE = {
 // The rectangle highlighted behind a bar on hover — recharts defaults to a
 // flat gray that doesn't adapt to the theme either.
 export const CHART_CURSOR_FILL = { fill: "var(--muted)" };
+
+// Axis labels: ₹12,34,567 is far too wide for a y-axis gutter, so shorten to
+// the Indian short scale (K / L / Cr) once the numbers get big.
+export function compactINR(value: number) {
+  const abs = Math.abs(value);
+  if (abs >= 1_00_00_000) return `₹${(value / 1_00_00_000).toFixed(abs >= 10_00_00_000 ? 0 : 1)}Cr`;
+  if (abs >= 1_00_000) return `₹${(value / 1_00_000).toFixed(abs >= 10_00_000 ? 0 : 1)}L`;
+  if (abs >= 1_000) return `₹${(value / 1_000).toFixed(abs >= 10_000 ? 0 : 1)}K`;
+  return `₹${value}`;
+}

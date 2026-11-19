@@ -38,20 +38,28 @@ export function NeedsAttentionWidget({
         </span>
         <h2 className="text-base font-bold text-foreground">Review</h2>
       </div>
-      <div className="flex items-center justify-between gap-2">
-        <Link href={buildHref("needs_review", range, from, to)} className="group">
-          <div className="text-xs text-muted-foreground">Needs review</div>
-          <div className="flex items-center gap-1 text-lg font-extrabold text-warning group-hover:underline">
+      {/* Stacked rows: "Needs review" and "Unmapped" side by side wrapped onto
+          two lines of different heights once the card got narrow. */}
+      <div className="flex flex-col gap-1.5">
+        <Link
+          href={buildHref("needs_review", range, from, to)}
+          className="group flex items-baseline justify-between gap-2"
+        >
+          <span className="truncate text-xs text-muted-foreground">Needs review</span>
+          <span className="flex shrink-0 items-center gap-1 text-base font-extrabold text-warning tabular-nums group-hover:underline">
             {needsReview}
             <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
-          </div>
+          </span>
         </Link>
-        <Link href={buildHref("unmapped", range, from, to)} className="group">
-          <div className="text-xs text-muted-foreground">Unmapped</div>
-          <div className="flex items-center gap-1 text-lg font-extrabold text-highlight group-hover:underline">
+        <Link
+          href={buildHref("unmapped", range, from, to)}
+          className="group flex items-baseline justify-between gap-2"
+        >
+          <span className="truncate text-xs text-muted-foreground">Unmapped</span>
+          <span className="flex shrink-0 items-center gap-1 text-base font-extrabold text-highlight tabular-nums group-hover:underline">
             {unmapped}
             <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
-          </div>
+          </span>
         </Link>
       </div>
     </div>
